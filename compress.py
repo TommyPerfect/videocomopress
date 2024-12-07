@@ -36,37 +36,35 @@ def compress_video(video_full_path, output_file_name, target_size):
     
     # das ding tuts
     ffmpeg.output(i, output_file_name,
-                  **{
-                    'c:v': 'libx265',
-                    'b:v': video_bitrate,
-                    'pass': 20,
-                    'c:a': 'aac',
-                    'b:a': audio_bitrate,
-                    't': '00:09:59',
-                    }
-                  ).overwrite_output().run(cmd)
+        **{
+            'c:v': 'libx265',
+            'b:v': video_bitrate,
+            'pass': 20,
+            'c:a': 'aac',
+            'b:a': audio_bitrate,
+            't': '00:09:59',
+        }
+    ).overwrite_output().run(cmd)
                  
-    #does it with nice status bar and percentage, but uses 10% cpu for it...
-    # process = FfmpegProcess([
-        # "ffmpeg", "-y",
-        # "-hwaccel", "cuda",
-        # "-i", video_full_path, 
-        # "-c:v", "libx265", 
-        # "-b:v", str(video_bitrate), 
-        # "-pass", str(20), 
-        # "-c:a", "aac", 
-        # "-b:a", str(audio_bitrate), 
-        # "-t", "00:09:59", 
-        # "-stats_period", "10",
-        # output_file_name
-    # ])
-    
-    # # Use the run method to run the FFmpeg command.
-    process.run(
-        progress_bar_description = "Converting to " + output_file_name
-    )
-    
-    
+                 
+#does it with nice status bar and percentage, but uses 10% cpu for it...
+# process = FfmpegProcess([
+    # "ffmpeg", "-y",
+    # "-hwaccel", "cuda",
+    # "-i", video_full_path, 
+    # "-c:v", "libx265", 
+    # "-b:v", str(video_bitrate), 
+    # "-pass", str(20), 
+    # "-c:a", "aac", 
+    # "-b:a", str(audio_bitrate), 
+    # "-t", "00:09:59", 
+    # "-stats_period", "10",
+    # output_file_name
+# ])    
+# # Use the run method to run the FFmpeg command.
+# process.run(
+    # progress_bar_description = "Converting to " + output_file_name
+# )
     
 #, 'v:f': 'scale=540:-1'               -hwaccel cuda
 #    os.system('ffmpeg -hwaccel cuda -hwaccel_output_format cuda -i '.video_full_path.' -c:v h264_nvenc -preset slow '.output_file_name)
