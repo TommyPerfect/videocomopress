@@ -70,6 +70,8 @@ def compress_video(video_full_path, output_file_name, target_size):
 #    os.system('ffmpeg -hwaccel cuda -hwaccel_output_format cuda -i '.video_full_path.' -c:v h264_nvenc -preset slow '.output_file_name)
     
 wished_size = 50
+reduceiftoobig = 5
+c = 0
 
 # für drag und drop und so
 for param in sys.argv[1:]:
@@ -77,14 +79,16 @@ for param in sys.argv[1:]:
     #print(droppedFile)
     size = wished_size
     while True:
-        newFile = re.sub('\\..*?$', '_small_' + str(size) + '.mp4', droppedFile)
+        newFile = re.sub('\\..*?$', '_small_' + str(int(size)) + '.mp4', droppedFile)
         print(newFile)
         #time.sleep(1)
-        compress_video(droppedFile, newFile, size * 1024)
+        compress_video(droppedFile, newFile, size * 1000)
         newsize = os.stat(newFile).st_size / (1024 * 1024)
         if newsize < wished_size:
             break
         else:
-            size -= 5
-            print('File to big, doing again with ' + size + ' cause ' + newsize + ' > ' + wished_size + ' !!!!!!')
+            size *= (wished_size/newsize)
+            size -= (c * reduceiftoobig)
+            c = c + 1
+            print('File to big, doing again with ' + str(size) + ' wishedsize cause ' + str(newsize) + ' > ' + str(wished_size) + ' !!!!!!')
     
