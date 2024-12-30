@@ -10,7 +10,7 @@ def getVideoAudioBitrate(path, targetSize, maxTime):
     # Audio bitrate, in bps.
     tempcalc = next((s for s in probe['streams'] if s['codec_type'] == 'audio'), None)
     if tempcalc != None:
-        audioBitrate = float(['bit_rate'])
+        audioBitrate = float(tempcalc['bit_rate'])
     else:
         audioBitrate = float(0)
     # Target total bitrate, in bps.
