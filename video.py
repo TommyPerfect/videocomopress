@@ -8,7 +8,11 @@ def getVideoAudioBitrate(path, targetSize, maxTime):
     # Video duration, in s.
     duration = min(float(probe['format']['duration']), maxTime)
     # Audio bitrate, in bps.
-    audioBitrate = float(next((s for s in probe['streams'] if s['codec_type'] == 'audio'), None)['bit_rate'])
+    tempcalc = next((s for s in probe['streams'] if s['codec_type'] == 'audio'), None)
+    if tempcalc != None:
+        audioBitrate = float(['bit_rate'])
+    else:
+        audioBitrate = float(0)
     # Target total bitrate, in bps.
     targetTotalBitrate = (targetSize * 1024 * 8) / (1.073741824 * duration)
     # Target audio bitrate, in bps

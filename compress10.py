@@ -1,7 +1,7 @@
 import os, ffmpeg, sys, re, video
 
 cmd = ['ffmpeg', '-hwaccel','cuda', '-loglevel','quiet', '-stats']
-wishedSize = 50
+wishedSize = 10
 passes = 20
 reduceiftoobig = 5
 maxTime = 599.0
