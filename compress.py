@@ -1,7 +1,7 @@
 import videoCommand
 
 sizeWished = 50
-maxTime = 599.0
+timeMax = 599.0
 
 
-videoCommand.doDropped(sizeWished, maxTime)
+videoCommand.doDropped(videoCommand, sizeWished, timeMax)

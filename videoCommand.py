@@ -1,6 +1,8 @@
-import video
+import os, sys, video, re
 
-def doDropped(sizeWished, timeMax = 10.0):
+def doDropped(self, sizeWished, timeMax = 10.0):
+
+    print('sizeWished: ' + str(sizeWished) + ' timemax: ' + str(timeMax) + ' !!!!!!')
 
     # für drag und drop und so
     for param in sys.argv[1:]:
@@ -9,16 +11,13 @@ def doDropped(sizeWished, timeMax = 10.0):
         size = sizeWished
         c = 0
         while True:
-            newFile = re.sub('\\..*?$', '_small_' + str(int(size)) + '.mp4', pathImput)
-            print(newFile)
-            video = new video(
-                pathImput, 
-                pathOutput, 
-                size, 
-                timeMax,
-            )
-            video.compress(pathImput, newFile, size * 1000, timeMax, passes, cmd)
-            newSize = os.stat(newFile).st_size / (1024 * 1024)
+            pathOutput = re.sub('\\..*?$', '_small_' + str(int(size)) + '.mp4', pathImput)
+            print(pathOutput)
+            v = video.video(video, pathImput, pathOutput, size, timeMax)
+            
+            v.compress()
+            
+            newSize = os.stat(pathOutput).st_size / (1024 * 1024)
             if newSize < sizeWished:
                 break
             else:
