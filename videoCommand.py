@@ -1,6 +1,6 @@
 import os, sys, video, re
 
-def doDropped(sizeWished, timeMax = 10.0):
+def doDropped(sizeWished, timeMax = 599.0):
 
     print('sizeWished: ' + str(sizeWished) + ' timemax: ' + str(timeMax) + ' !!!!!!')
 

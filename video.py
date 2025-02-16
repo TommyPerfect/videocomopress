@@ -23,7 +23,7 @@ class video:
     def getVideoAudioBitrate(self):
         probe = ffmpeg.probe(self.pathInput)
         self.duration = float(probe['format']['duration'])
-        self.speed = 1
+        self.speed = 1.0
         # Video duration, in s.
         self.durationWished = min(self.duration, self.maxTime)
         #if self.duration > self.maxTime:
@@ -62,7 +62,7 @@ class video:
         else:
             self.audioBitrate = float(0)
         # Target total bitrate, in bps.
-        self.targetTotalBitrate = (self.sizeWished * 1024 * 1024 * 8) / (1.073741824 * self.duration)
+        self.targetTotalBitrate = (self.sizeWished * 1024 * 1024 * 8) / (1.073741824 * self.durationWished)
         # Target audio bitrate, in bps
         if 10 * self.audioBitrate > self.targetTotalBitrate:
             self.audioBitrate = self.targetTotalBitrate / 10
