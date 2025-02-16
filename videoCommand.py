@@ -6,14 +6,14 @@ def doDropped(self, sizeWished, timeMax = 10.0):
 
     # für drag und drop und so
     for param in sys.argv[1:]:
-        pathImput = param
+        pathInput = param
         #print(droppedFile)
         size = sizeWished
         c = 0
         while True:
-            pathOutput = re.sub('\\..*?$', '_small_' + str(int(size)) + '.mp4', pathImput)
+            pathOutput = re.sub('\\..*?$', '_small_' + str(int(size)) + '.mp4', pathInput)
             print(pathOutput)
-            v = video.video(video, pathImput, pathOutput, size, timeMax)
+            v = video.video(pathInput, pathOutput, size, timeMax)
             
             v.compress()
             

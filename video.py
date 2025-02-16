@@ -2,8 +2,8 @@ import ffmpeg, re, time
 
 class video:
     
-    def __init__(self, pathImput, pathOutput, sizeWished, maxTime, withAudio = 1, passes = 20, reduceiftoobig = 5, minAudioBitrate = 32000, maxAudioBitrate = 256000):
-        self.pathImput = pathImput
+    def __init__(self, pathInput, pathOutput, sizeWished, maxTime, withAudio = 1, passes = 20, reduceiftoobig = 5, minAudioBitrate = 32000, maxAudioBitrate = 256000):
+        self.pathInput = pathInput
         self.pathOutput = pathOutput
         self.sizeWished = sizeWished * 1000
         self.maxTime = maxTime
@@ -21,7 +21,7 @@ class video:
         
     #gets Video- and Audio Bitrate of Video of desired Size
     def getVideoAudioBitrate(self):
-        probe = ffmpeg.probe(self.pathImput)
+        probe = ffmpeg.probe(self.pathInput)
         self.duration = float(probe['format']['duration'])
         self.speed = 1
         # Video duration, in s.
@@ -37,7 +37,7 @@ class video:
     def compress(self):
         maxTimeStr = time.strftime('%H:%M:%S', time.gmtime(self.maxTime))
         self.getVideoAudioBitrate()
-        i = ffmpeg.input(self.pathImput)
+        i = ffmpeg.input(self.pathInput)
         ffmpeg.output(i, self.pathOutput,
             **{
                 'c:v': 'libx265',
