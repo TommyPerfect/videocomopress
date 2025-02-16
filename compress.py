@@ -1,6 +1,6 @@
 import videoCommand
 
-sizeWished = 10000
+sizeWished = 50
 timeMax = 599.0
 
 

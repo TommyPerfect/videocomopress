@@ -26,8 +26,8 @@ class video:
         self.speed = 1
         # Video duration, in s.
         self.durationWished = min(self.duration, self.maxTime)
-        if self.duration > self.maxTime:
-            self.speed = self.duration / self.maxTime
+        #if self.duration > self.maxTime:
+        #    self.speed = self.duration / self.maxTime
         # Audio bitrate, in bps.
         self.getAudioBitrate(probe)
         # Target video bitrate, in bps.
@@ -46,7 +46,7 @@ class video:
                 'c:a': 'aac',
                 'b:a': self.audioBitrate,
                 't': maxTimeStr,
-                'filter:v': 'setpts=' + str(self.speed) + '*PTS'
+                #'filter:v': 'setpts=' + str(self.speed) + '*PTS'
             }
         ).overwrite_output().run(self.cmd)
     
