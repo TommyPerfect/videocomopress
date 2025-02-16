@@ -7,3 +7,6 @@ Video Compression 4 9gag
 Examples (u can drag&drop videos files onto) are:
 1. compress.py 50mb - 10min max
 2. compress10.py 10mb - 10sec max
+
+Origin:
+https://stackoverflow.com/questions/64430805/how-to-compress-video-to-target-size-by-python
