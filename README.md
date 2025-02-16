@@ -5,5 +5,5 @@ Video Compression 4 9gag
 3. install FFmpeg https://ffmpeg.org/download.html
 
 Examples (u can drag&drop videos files onto) are:
-compress.py 50mb - 10min max
-compress10.py 10mb - 10sec max
+1. compress.py 50mb - 10min max
+2. compress10.py 10mb - 10sec max
