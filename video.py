@@ -2,7 +2,7 @@ import ffmpeg, re, time
 
 class video:
     
-    def __init__(self, pathInput, pathOutput, sizeWished, maxTime, withAudio = 1, passes = 20, reduceiftoobig = 5, minAudioBitrate = 32000, maxAudioBitrate = 256000):
+    def __init__(self, pathInput, pathOutput, sizeWished, maxTime, withAudio = 1, passes = 20, minAudioBitrate = 32000, maxAudioBitrate = 256000):
         self.pathInput = pathInput
         self.pathOutput = pathOutput
         self.sizeWished = sizeWished
