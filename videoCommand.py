@@ -1,13 +1,13 @@
 import os, sys, video, re
 
-def doDropped(self, sizeWished, timeMax = 10.0):
+def doDropped(sizeWished, timeMax = 10.0):
 
     print('sizeWished: ' + str(sizeWished) + ' timemax: ' + str(timeMax) + ' !!!!!!')
 
     # für drag und drop und so
     for param in sys.argv[1:]:
         pathInput = param
-        #print(droppedFile)
+        print(pathInput)
         size = sizeWished
         c = 0
         while True:

@@ -5,7 +5,7 @@ class video:
     def __init__(self, pathInput, pathOutput, sizeWished, maxTime, withAudio = 1, passes = 20, reduceiftoobig = 5, minAudioBitrate = 32000, maxAudioBitrate = 256000):
         self.pathInput = pathInput
         self.pathOutput = pathOutput
-        self.sizeWished = sizeWished * 1000
+        self.sizeWished = sizeWished
         self.maxTime = maxTime
         self.passes = passes
         self.cmd = ['ffmpeg', '-hwaccel','cuda', '-loglevel','quiet', '-stats']
@@ -62,7 +62,7 @@ class video:
         else:
             self.audioBitrate = float(0)
         # Target total bitrate, in bps.
-        self.targetTotalBitrate = (self.sizeWished * 1024 * 8) / (1.073741824 * self.duration)
+        self.targetTotalBitrate = (self.sizeWished * 1024 * 1024 * 8) / (1.073741824 * self.duration)
         # Target audio bitrate, in bps
         if 10 * self.audioBitrate > self.targetTotalBitrate:
             self.audioBitrate = self.targetTotalBitrate / 10
