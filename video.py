@@ -25,7 +25,7 @@ class video:
         self.duration = float(probe['format']['duration'])
         self.speed = 1.0
         # Video duration, in s.
-        self.durationWished = min(self.duration, self.maxTime)
+        self.durationWished = self.duration if self.maxTime == 0 else min(self.duration, self.maxTime)
         #if self.duration > self.maxTime:
         #    self.speed = self.duration / self.maxTime
         # Audio bitrate, in bps.
