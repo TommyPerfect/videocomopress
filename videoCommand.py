@@ -1,9 +1,7 @@
 import os, sys, video, re
 
-def doDropped(sizeWished, timeMax = 599.0, reduceiftoobig = 5):
-
+def doDropped(sizeWished, timeMax = 0, useCuda = 1, reduceiftoobig = 5):
     print('sizeWished: ' + str(sizeWished) + ' timemax: ' + str(timeMax) + ' !!!!!!')
-
     # für drag und drop und so
     for param in sys.argv[1:]:
         pathInput = param
@@ -13,10 +11,8 @@ def doDropped(sizeWished, timeMax = 599.0, reduceiftoobig = 5):
         while True:
             pathOutput = re.sub('\\..*?$', '_small_' + str(int(size)) + '.mp4', pathInput)
             print(pathOutput)
-            v = video.video(pathInput, pathOutput, size, timeMax)
-            
-            v.compress()
-            
+            v = video.video(pathInput, pathOutput, size, timeMax, useCuda)            
+            v.compress()            
             newSize = os.stat(pathOutput).st_size / (1024 * 1024)
             if newSize < sizeWished:
                 break
@@ -24,5 +20,4 @@ def doDropped(sizeWished, timeMax = 599.0, reduceiftoobig = 5):
                 size *= (sizeWished/newSize)
                 size -= (c * reduceiftoobig)
                 c = c + 1
-                print('File to big, doing again with ' + str(size) + ' sizeWished cause ' + str(newSize) + ' > ' + str(sizeWished) + ' !!!!!!')
-     
+                print('File to big, doing again with ' + str(size) + ' sizeWished cause ' + str(newSize) + ' > ' + str(sizeWished) + ' !!!!!!')     

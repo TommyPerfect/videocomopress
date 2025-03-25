@@ -2,13 +2,15 @@ import ffmpeg, re, time
 
 class video:
     
-    def __init__(self, pathInput, pathOutput, sizeWished, maxTime, withAudio = 1, passes = 20, minAudioBitrate = 32000, maxAudioBitrate = 256000):
+    def __init__(self, pathInput, pathOutput, sizeWished, maxTime, useCuda = 1, withAudio = 1, passes = 20, minAudioBitrate = 32000, maxAudioBitrate = 256000):
         self.pathInput = pathInput
         self.pathOutput = pathOutput
         self.sizeWished = sizeWished
         self.maxTime = maxTime
         self.passes = passes
-        self.cmd = ['ffmpeg', '-hwaccel','cuda', '-loglevel','quiet', '-stats']
+        self.cmd = ['ffmpeg', '-loglevel','quiet', '-stats']
+        if useCuda:
+            self.cmd += ['-hwaccel','cuda']
         self.withAudio = withAudio
         self.minAudioBitrate = minAudioBitrate
         self.maxAudioBitrate = maxAudioBitrate
