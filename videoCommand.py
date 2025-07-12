@@ -1,6 +1,6 @@
-import os, sys, video, re
+import os, sys, video, re, ffmpeg, subprocess
 
-def doDropped(sizeWished, timeMax = 0, useCuda = 1, reduceiftoobig = 5):
+def doDropped(sizeWished, timeMax = 0, useCuda = 1, reduceiftoobig = 7):
     print('sizeWished: ' + str(sizeWished) + ' timemax: ' + str(timeMax) + ' !!!!!!')
     # für drag und drop und so
     for param in sys.argv[1:]:
@@ -21,3 +21,14 @@ def doDropped(sizeWished, timeMax = 0, useCuda = 1, reduceiftoobig = 5):
                 size -= (c * reduceiftoobig)
                 c = c + 1
                 print('File to big, doing again with ' + str(size) + ' sizeWished cause ' + str(newSize) + ' > ' + str(sizeWished) + ' !!!!!!')     
+                
+def convertDropped():
+    cmd = ['ffmpeg', '-loglevel','quiet', '-stats']
+    for param in sys.argv[1:]:
+        pathInput = param
+        print(pathInput)
+        pathOutput = re.sub('\\..*?$', '.m4a', pathInput)
+        print(pathOutput)
+        cmd = ['ffmpeg', '-i', pathInput, '-vn', '-c:a', 'copy', pathOutput]
+        print(cmd)
+        subprocess.run(cmd) 
