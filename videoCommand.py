@@ -1,6 +1,6 @@
 import os, sys, video, re, ffmpeg, subprocess
 
-def doDropped(sizeWished, timeMax = 0, useCuda = 1, reduceiftoobig = 7):
+def doDropped(sizeWished, timeMax = 0, ensureFilesize = 1, useCuda = 1, reduceiftoobig = 7):
     print('sizeWished: ' + str(sizeWished) + ' timemax: ' + str(timeMax) + ' !!!!!!')
     # für drag und drop und so
     for param in sys.argv[1:]:
@@ -14,7 +14,7 @@ def doDropped(sizeWished, timeMax = 0, useCuda = 1, reduceiftoobig = 7):
             v = video.video(pathInput, pathOutput, size, timeMax, useCuda)            
             v.compress()            
             newSize = os.stat(pathOutput).st_size / (1024 * 1024)
-            if newSize < sizeWished:
+            if newSize < sizeWished or ensureFilesize == 0:
                 break
             else:
                 size *= (sizeWished/newSize)
